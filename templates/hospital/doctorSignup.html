@@ -1,0 +1,41 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+{% block style %}
+<style>
+
+</style>
+{% endblock style %}
+{% block content %}
+
+<div class="container p-0 border border-info">
+    <div class="bg-dark p-2  text-white text-center">
+        <h1>Doctor Registration Form</h1>
+    </div>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="p-4 d-flex flex-wrap gap-3 m-4">
+
+            {% for frm in userform %}
+            <div class="form-floating " style="width: 30rem;">
+                {{frm}}
+                {{frm.label_tag}}
+            {{frm.errors}}
+            </div>
+            {% endfor %}
+            {% for frm in doctorform %}
+        <div class="form-floating " style="width: 30rem;">
+            {{frm}}
+            {{frm.label_tag}}
+        {{frm.errors}}
+        </div>
+        {% endfor %}
+        
+            
+            <button class="btn btn-primary w-25 me-4 ">SignUp</button>
+            <p>Already have as Account ? <a href="{% url 'doctorlogin' %}">Login here</a></p>
+        
+        </div>
+        
+    </form>
+</div>
+{% endblock content %}

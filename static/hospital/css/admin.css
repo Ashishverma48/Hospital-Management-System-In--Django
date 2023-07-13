@@ -1,0 +1,127 @@
+.admin {
+  display: flex;
+   
+}
+.admin-left {
+  /* border: 1px solid red; */
+  width: 20%;
+  height: 100vh;
+}
+.admin-left > div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  gap: .6rem;
+  border: 1px solid;
+}
+.admin-left>div a{
+    width: 100%;
+}
+.admin-left button{
+    width: 100%;
+    padding: 10px;
+    font-weight: 500;
+    background-color: rgba(13, 30, 175, 0.764);
+    color: white;
+    border-radius: 10px;
+    border: 0;
+
+}
+.admin-left button:active{
+    background-color: rgba(26, 46, 233, 0.764);
+}
+.admin-left img {
+  width: 50%;
+  object-fit: cover;
+}
+.admin-right {
+  border: 1px solid red;
+  width: 80%;
+  height: 100vh;
+}
+.admin-card{
+    width: 100%;
+     display: flex;
+     flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.cards{
+    width: 30%;
+    
+    height: 10rem;
+    padding: 1.3rem;
+    display: flex;
+    
+    justify-content: space-between;
+}
+
+.admin-icons{
+    /* padding: 2rem; */
+    height: 90px;
+    width: 90px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(189, 205, 192);
+    /* border: 1px solid red; */
+    border-radius: 50%;
+    font-size: 3rem;
+}
+
+
+.all-list{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+}
+.all-list>div{
+  width: calc(50% - .1rem);
+}
+.all-list>div span{
+    color: white;
+}
+th{
+    background-color: aquamarine !important;
+}
+tr:nth-child(even){
+    background-color: rgba(127, 255, 212, 0.346) !important;
+}
+
+#doctorImg{
+    width: 4rem;
+}
+tr:nth-child(even){
+    background-color: red;
+}
+
+.cardsApp{
+display: block;
+padding: 1.3rem 2rem;
+background-color: red;
+border-radius: 10px;
+color: white;
+min-width: 18rem;
+margin-top: 2rem;
+}
+.cardsApp>a{
+  text-decoration: none;
+  color: white;
+}
+.cardsApp i{
+  margin-top: .5rem;
+  font-size: 1.5rem;
+}
+.cardsApp:nth-child(1){
+  background-color: rgba(30, 168, 222, 0.996);
+}
+.cardsApp:nth-child(2){
+  background-color: rgb(11, 150, 20);
+}
+.cardsApp:nth-child(3){
+  background-color: rgb(236, 164, 9);
+}

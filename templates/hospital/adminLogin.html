@@ -1,0 +1,29 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container border border-info">
+    <div class="bg-dark text-center text-white p-2 mt-2">
+        <h1>Admin Login</h1>
+    </div>
+    <div class="mt-3">
+        <form action="" method="post" >
+            {%  csrf_token %}
+            <div class="d-flex justify-content-evenly flex-wrap gap-3">
+                <div class="form-floating" style="width: 30rem;">
+                    <input type="text" class="form-control" placeholder="Username" id="adminUserName" name="adminUserName">
+                    <label for="adminUserName">Username</label>
+                </div>
+                <div class="form-floating" style="width: 30rem;">
+                    <input type="password" class="form-control" placeholder="Password" id="adminPassword" name="adminPassword">
+                    <label for="adminPassword">Password</label>
+                </div>
+                <button class="btn btn-primary w-25">Login</button>
+            </div>
+            <p class="text-center p-3">Dont have a acoount <a href="{% url 'adminsignup'%}">Signup</a></p>
+        
+        </form>
+    </div>
+</div>
+{% endblock content %}
+

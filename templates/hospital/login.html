@@ -1,0 +1,27 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="d-flex justify-content-around flex-wrap  text-center mt-5">
+   <a href="{% url 'adminlogin'%}">
+    <div class="card" style="width: 18rem;">
+        <img src="{% static 'hospital/images/admin.png' %}" class="card-img-top" alt="">
+        <h2>Admin</h2>
+        <div><a href="{% url 'adminsignup' %}" class="btn btn-primary me-4">Register</a>
+        <a href="{% url 'adminlogin' %}" class="btn btn-primary ">Login</a></div>
+    </div>
+   </a>
+    <div class="card" style="width: 18rem;">
+        <img src="{% static 'hospital/images/doctor.png' %}" class="card-img-top" alt="">
+        <h2>Doctor</h2>
+        <div><a href="{% url 'doctorsignup' %}" class="btn btn-primary me-4">Register</a>
+            <a href="{% url 'doctorlogin' %}" class="btn btn-primary ">Login</a></div>
+    </div>
+    <div class="card" style="width: 18rem;">
+        <img src="{% static 'hospital/images/patient.jpg' %}" class="card-img-top   " alt="">
+        <h3 >Patient</h3>
+        <div><a href="{% url 'patientsignup' %}" class="btn btn-primary me-4">Register</a>
+            <a href="{% url 'patientlogin' %}" class="btn btn-primary ">Login</a></div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,27 @@
+{% extends 'hospital/adminDashboard.html' %}
+{% block adminDashBoard %}
+<h2 class="text-center p-2 border"> Doctors</h2>
+<table class="table table-striped table-hover">
+    
+    <tr class="bg-info" > 
+        <th >Profile Picture</th>
+        <th>Name</th>
+        <th>Mobile</th>
+        <th>Address</th>
+        <th>Department</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+    {% for doctor in doctors %}
+        <tr>
+        <td><img id="doctorImg" src="{{doctor.profile_pic.url}}" alt=""></td>
+        <td>{{doctor.user.username}}</td>
+        <td>{{doctor.mobile}}</td>
+        <td>{{doctor.address}}</td>
+        <td>{{doctor.department}}</td>
+        <td><a href="{% url 'admindoctorupdate' doctor.user.id %}"><i class="fa-regular fa-pen-to-square"></i></a></td>
+        <td><a href="{% url 'admindoctordelete' doctor.user.id %}"><i class="fa-solid fa-trash"></i></a></td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock adminDashBoard %}
