@@ -1,0 +1,35 @@
+{% extends 'hospital/adminDashboard.html' %}
+{% block adminDashBoard %}
+
+
+<div class="container p-0 border border-info">
+   
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="p-4 d-flex flex-wrap gap-3 m-4">
+
+            {% for frm in userform %}
+            <div class="form-group " style="width: 20rem;">
+                {{frm}}
+               
+            {{frm.errors}}
+            </div>
+            {% endfor %}
+            {% for frm in patientform %}
+        <div class="form-group " style="width: 20rem;">
+            {{frm}}
+            
+          <span class="text-danger">{{frm.errors}}</span>
+        </div>
+        {% endfor %}
+        
+            
+        
+        
+        <button class="btn btn-primary w-25 me-4  " style="height: 2.4rem;">Update</button>
+    </div>
+    
+    </form>
+</div>
+
+{% endblock adminDashBoard%}

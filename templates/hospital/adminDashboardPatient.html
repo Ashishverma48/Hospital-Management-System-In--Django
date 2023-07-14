@@ -7,12 +7,14 @@
         </div>
        </a>
     <div class="cardsApp">
-        <h6>Admit Patient</h6>
-        <i class="fa-solid fa-book-medical"></i>
+        <a href="{% url 'adminPatientAdd'%}"><h6>Admit Patient</h6>
+            <i class="fa-solid fa-book-medical"></i></a>
     </div>
     <div class="cardsApp">
+       <a href="{% url 'adminPatientApprovel' %}">
         <h6>Approve Patient</h6>
         <i class="fa-regular fa-circle-check"></i>
+       </a>
     </div>
     <div class="cardsApp">
         <h6>Discharge Patient</h6>

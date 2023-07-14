@@ -1,16 +1,25 @@
 {% extends 'hospital/adminDashboard.html' %} {% block adminDashBoard %}
+{% if messages %}
+{% for msg in messages %}<div class="alert alert-{{msg.tags}} alert-dismissible fade show" role="alert">
+{{msg}}
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+{% endfor %}
+{% endif %}
 <div class="admin-card">
+    
     <div class="cardsApp" >
-        <h6>View Appointment</h6>
-        <i class="fa-solid fa-calendar-days"></i>
-        </div>
+        <a href="{% url 'adminViewAppointment'%}"><h6>View Appointment</h6>
+            <i class="fa-solid fa-calendar-days"></i>
+            </div></a>
     <div class="cardsApp">
-        <h6>Book Appointment</h6>
-        <i class="fa-solid fa-book-medical"></i>
+        <a href="{% url 'adminAddAppointment' %}"><h6>Book Appointment</h6>
+            <i class="fa-solid fa-book-medical"></i></a>
     </div>
     <div class="cardsApp">
-        <h6>Approve Appointment</h6>
-        <i class="fa-regular fa-circle-check"></i>
+       <a href="{% url 'adminApprovelAppointment' %}"> <h6>Approve Appointment</h6>
+        <i class="fa-regular fa-circle-check"></i></a>
     </div>
 </div>
 {% endblock adminDashBoard %}

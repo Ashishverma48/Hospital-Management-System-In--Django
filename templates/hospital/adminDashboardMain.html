@@ -45,7 +45,7 @@
             {% endfor %}
         </table>
     </div>
-    <div ><table class="table">
+    <div ><table class="table border-info border">
         <tr >
             <th colspan="5" class="text-center bg-primary text-white">Patient List</th>
         </tr>
@@ -56,8 +56,8 @@
             <th>Address </th>
             <th>Status</th>
         </tr>
+        {% for patient in patients %}
         <tr>
-            {% for patient in patients %}
             <td>{{patient.user.username}}</td>
             <td>{{patient.symptoms}}</td>
             <td>{{patient.mobile}}</td>
@@ -69,8 +69,8 @@
                 <span class="bg-danger px-2" style="border-radius: 10px;">On hold</span>
                 {% endif %}
             </td>
-            {% endfor %}
         </tr>
+        {% endfor %}
     </table></div>
    </div>
 {% endblock adminDashBoard %}

@@ -5,12 +5,14 @@
         <i class="fa-solid fa-calendar-days"></i>
         </div></a>
     <div class="cardsApp">
+      <a href="{% url 'adminDoctorAdd'%}">
         <h6>Register Doctor</h6>
         <i class="fa-solid fa-book-medical"></i>
+      </a>
     </div>
     <div class="cardsApp">
-        <h6>Approved Doctor</h6>
-        <i class="fa-regular fa-circle-check"></i>
+        <a href="{% url 'adminDoctorApprove' %}"><h6>Approved Doctor</h6>
+            <i class="fa-regular fa-circle-check"></i></a>
     </div>
     
 </div>

@@ -53,9 +53,10 @@ class PatientUserForms(forms.ModelForm):
             frm.widget.attrs['placeholder']=f'Enter {frm.label}'
 
 class PatientForm(forms.ModelForm):
+    assignedDoctorId=forms.ModelChoiceField(queryset=Doctor.objects.all().filter(status=True),empty_label="Name and Department", to_field_name="user_id")
     class Meta:
         model = Patient
-        fields =['address','mobile','symptoms','assignedDoctorId','profile_pic']
+        fields =['address','mobile','symptoms','profile_pic']
     def __init__(self,*args, **kwargs):
         super().__init__(*args, **kwargs)
         for frm in self.fields.values():
@@ -65,3 +66,15 @@ class PatientForm(forms.ModelForm):
 
    
  
+class AppointmentForm(forms.ModelForm):
+    patientId = forms.ModelChoiceField(queryset=Patient.objects.all().filter(status=True),empty_label='Patient Name And Symptoms',to_field_name='user_id')
+    doctorId = forms.ModelChoiceField(queryset=Doctor.objects.all().filter(status=True),empty_label='Doctor Name And Department',to_field_name='user_id')
+    class Meta:
+        model = Appointment
+        fields = ['description']
+        
+    def __init__(self,*args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for frm in self.fields.values():
+            frm.widget.attrs['class']='form-control'
+            frm.widget.attrs['placeholder']=frm.label

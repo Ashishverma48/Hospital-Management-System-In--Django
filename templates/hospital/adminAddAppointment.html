@@ -1,0 +1,29 @@
+{% extends 'hospital/adminDashboard.html' %}
+{% block adminDashBoard %}
+
+
+<div class="container p-0 border border-info">
+   
+    <form action="" method="post" >
+        {% csrf_token %}
+        <div class="p-4 d-flex flex-wrap gap-3 m-4">
+
+            {% for frm in appointment %}
+            <div class="form-group " style="width: 100%;">
+                {{frm}}
+             
+                {{frm.errors}}
+            </div>
+            {% endfor %}
+          
+        
+            
+        
+        
+        <button class="btn btn-primary w-25 me-4  " style="height: 2.4rem;">Book</button>
+    </div>
+    
+    </form>
+</div>
+
+{% endblock adminDashBoard%}
