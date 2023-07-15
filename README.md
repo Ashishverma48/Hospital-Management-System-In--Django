@@ -1,6 +1,6 @@
 
 # Hospital Management
-![developer](https://img.shields.io/badge/Developed%20By%20%3A-Sumit%20Kumar-red)
+![developer](https://img.shields.io/badge/Developed%20By%20%3A-Ashish%20Verma-red)
 ---
 ## screenshots
 ### Homepage
@@ -77,5 +77,5 @@ This project is developed for demo purpose and it's not supposed to be used in r
 
 ## Feedback
 Any suggestion and feedback is welcome. You can message me on facebook
-- [Contact on Facebook](https://fb.com/sumit.luv)
-- [Subscribe my Channel LazyCoder On Youtube](https://youtube.com/lazycoders)
+- [Contact on Linkdin](https://www.linkedin.com/in/ashishverma48/)
+- [Contact on Email](ashishkv845@gmail.com)

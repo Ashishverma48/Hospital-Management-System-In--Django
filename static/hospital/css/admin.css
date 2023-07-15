@@ -1,5 +1,6 @@
 .admin {
   display: flex;
+  margin-top: 2rem;
    
 }
 .admin-left {
@@ -14,7 +15,7 @@
   align-items: center;
   padding: 1rem;
   gap: .6rem;
-  border: 1px solid;
+  /* border: 1px solid; */
 }
 .admin-left>div a{
     width: 100%;
@@ -37,7 +38,7 @@
   object-fit: cover;
 }
 .admin-right {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   width: 80%;
   height: 100vh;
 }
@@ -45,28 +46,29 @@
     width: 100%;
      display: flex;
      flex-wrap: wrap;
+     gap: 1rem;
     justify-content: space-evenly;
 }
 
 .cards{
-    width: 30%;
-    
+    min-width: 18rem;
+    border-radius: 5px;
     height: 10rem;
-    padding: 1.3rem;
+    padding: 1rem;
     display: flex;
-    
     justify-content: space-between;
 }
+
 
 .admin-icons{
     /* padding: 2rem; */
     height: 90px;
     width: 90px;
-    
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(189, 205, 192);
+    color: white;
+    background-color: rgba(189, 205, 192, 0.387);
     /* border: 1px solid red; */
     border-radius: 50%;
     font-size: 3rem;
