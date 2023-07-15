@@ -12,9 +12,9 @@
 ### Admin Dashboard
 ![dashboard snap](https://github.com/Ashishverma48/Hospital-Management-System-in-django/blob/master/static/hospital/images/ScreenShot/admin.png)
 ### Invoice
-![invoice snap](https://github.com/sumitkumar1503/hospitalmanagement/blob/master/static/screenshots/invoice.png?raw=true)
+
 ### Doctor list
-![doctor snap](https://github.com/sumitkumar1503/hospitalmanagement/blob/master/static/screenshots/admin_doctor.png?raw=true)
+
 ---
 ## Functions
 ### Admin
@@ -80,7 +80,7 @@ https://myaccount.google.com/lesssecureapps
 This project is developed for demo purpose and it's not supposed to be used in real application.
 
 ## Inspired By
--[](https://github.com/sumitkumar1503/hospitalmanagement)
+-[sumitkumar1503](https://github.com/sumitkumar1503/hospitalmanagement)
 
 
 ## Feedback
