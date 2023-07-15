@@ -78,3 +78,16 @@ class AppointmentForm(forms.ModelForm):
         for frm in self.fields.values():
             frm.widget.attrs['class']='form-control'
             frm.widget.attrs['placeholder']=frm.label
+
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = ['name','email','MobileNo','message']
+        labels={'name':'Enter Name','email':'Enter Email','MobileNo':'Mobile Number','message':'Enter Message'}
+
+    def __init__(self,*args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for frm in self.fields.values():
+            frm.widget.attrs['placeholder'] = f'Enter {frm.label}'
+            frm.widget.attrs['class'] = 'form-control'

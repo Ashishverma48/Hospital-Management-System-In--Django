@@ -1,0 +1,28 @@
+{% extends 'hospital/adminDashboard.html' %}
+{% block adminDashBoard %}
+<h2 class="text-center p-2 border"> Appointment Approvals Required</h2>
+<table class="table table-striped table-hover">
+    
+    <tr class="bg-info" > 
+        
+        <th>Name</th>
+        <th>Symptoms</th>
+        <th>Mobile</th>
+        <th>Discharge</th>
+      
+        
+    </tr>
+    {% for patient in patients %}
+        <tr>
+       
+       
+        <td>{{patient.get_name}}</td>
+        <td>{{patient.symptoms}}</td>
+        <td>{{patient.mobile}}</td>
+        <td><a href=""><i class="fa-solid fa-right-to-bracket"></i></a></td>
+        
+        
+        </tr>
+    {% endfor %}
+</table>
+{% endblock adminDashBoard %}

@@ -10,3 +10,7 @@ class PatientAdmin(admin.ModelAdmin):
 class DoctorAdmin(admin.ModelAdmin):
    list_display=['user','address','mobile','department','profile_pic']
         
+@admin.register(Gallery)
+class GalleryAdmin(admin.ModelAdmin):
+   list_display=['category',"images"]
+        

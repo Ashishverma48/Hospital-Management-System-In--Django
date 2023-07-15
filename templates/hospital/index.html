@@ -42,3 +42,186 @@
 
 
 {% endblock hero %}
+
+{% block content %}
+<section class="services" id="services">
+  <div class="text-center p-3 pt-4" > 
+    <h3>Our Key Feature</h3>
+    <p>Take a look at some of our key feature</p>
+  </div>
+  <div class="serviceFeature">
+    <div><i class="fa-solid fa-heart-pulse"></i>
+      <h6>Cardiology</h6></div>
+    <div>
+      <i class="fa-solid fa-ribbon"></i>
+      <h6>Orthopeadic</h6></div>
+    <div>
+      <i class="fa-solid fa-brain"></i>
+      <h6>Nurologist</h6></div>
+    <div>
+      <i class="fa-solid fa-tablets"></i>
+      <h6>Pharma Pipeline</h6></div>
+    <div>
+      <i class="fa-solid fa-prescription-bottle-medical"></i>
+      <h6>Pharma Team </h6></div>
+    <div>
+      <i class="fa-solid fa-thumbs-up"></i>
+      <h6>High Quality Treatement</h6></div>
+  </div>
+  
+</section>
+<div class="about" id="about">
+ <div>
+  <img src="{% static 'hospital/images/about-us.jpg' %}" alt="">
+ </div>
+ <div>
+  <h3>About the Hospital</h3>
+  <p>A hospital is a healthcare institution providing patient treatment with specialized health science and auxiliary healthcare staff and medical equipment.[1] The best-known type of hospital is the general hospital, which typically has an emergency department to treat urgent health problems ranging from fire and accident victims to a sudden illness. A district hospital typically is the major health care facility in its region, with many beds for intensive care and additional beds for patients who need long-term care. Specialized hospitals include trauma centers, rehabilitation hospitals, children's hospitals, seniors' (geriatric) hospitals, and hospitals for dealing with specific medical needs such as psychiatric treatment (see psychiatric hospital) and certain disease categories. Specialized hospitals can help reduce health care costs compared to general hospitals.[2] Hospitals are classified as general, specialty, or government depending on the sources of income received.</p>
+ </div>
+</div>
+<section class="exportDoctor">
+<h2 class="text-center p-3">Expert Doctor</h2>
+<div class="d-flex flex-wrap gap-3 justify-content-center">
+{% for doc in doctors %}
+  <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="{{doc.profile_pic.url}}" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title text-center">{{doc.user.first_name}}</h5>
+     
+    </div>
+  </div>
+{% endfor %}
+</div>
+
+</section>
+<section class="gallary" id="gallary">
+ 
+
+ <div class="text-center p-3 pt-4" > 
+    <h3>Our Gallary</h3>
+    <p>View Gallary</p>
+  </div>
+  <div class="gallaryCategory">
+  
+  <button id="AllClickBtn">All</button>
+   <button id="DentalClickBtn">Dental</button>
+   <button id="CardiologyClickBtn">Cardiology</button>
+   <button id="NeurologyClickBtn">Neurology</button>
+   <button id="LaboratyClickBtn">Laboraty</button>
+    
+   <a class="shoeAllImg" href="{% url 'images' %}">Show All images</a>
+  </div>
+  <div class="gallaryImg" id="gallaryImg">
+    
+    
+  </div>
+</section>
+
+<section class="contact" id="contact">
+<h2 class="text-center p-4">Contact Form </h2>
+
+<form action="" method="post">
+  {% csrf_token %}
+  <table class="table">
+    {% for frm in frm_unbound%}
+   <tr>
+    <th>{{frm.label}} : </th>
+    <td  colspan="2">{{frm}}</td>
+   </tr>
+    {% endfor %}
+    <tr>
+      <td></td>
+      <td><button >Send <i class="fa-solid fa-paper-plane "></i></button></td>
+    </tr>
+  </table>
+  
+</form>
+<div class="map">
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7007.1757831179175!2d77.30518663705388!3d28.582135274144576!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce45e3eccb8a7%3A0xd5eb60e62b19e6ba!2sSector%2015%2C%20Noida%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1689432261733!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+</section>
+{% endblock content %}
+
+{% block script %}
+
+<script>
+  const newData = [];
+
+  async function ApiCall() {
+    try {
+      let response = await fetch('http://127.0.0.1:8000/gallery/');
+      let data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error:', error);
+      return [];
+    }
+  }
+
+  async function initialize() {
+    try {
+      const data = await ApiCall();
+      newData.push(...data);
+     
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+
+  // Call initialize only once
+  initialize();
+
+  document.getElementById('AllClickBtn').addEventListener('click', () => {
+    const filteredData = newData.slice(0,10).map((a) => ShowData(a));
+
+    
+  });
+
+  document.getElementById('DentalClickBtn').addEventListener('click', () => {
+    const filteredData = newData.filter((item) => item.category === 'Dental');
+    clearGallery();
+    filteredData.map((a) => ShowData(a));
+    
+  });
+
+  document.getElementById('NeurologyClickBtn').addEventListener('click', () => {
+    const filteredData = newData.filter((item) => item.category === 'Neurology');
+    clearGallery();
+    filteredData.map(a=>ShowData(a))
+    console.log(filteredData);
+  });
+
+  document.getElementById('CardiologyClickBtn').addEventListener('click', () => {
+    const filteredData = newData.filter((item) => item.category === 'Cardiology');
+    clearGallery();
+    filteredData.map(a=>ShowData(a))
+   
+  });
+
+  document.getElementById('LaboratyClickBtn').addEventListener('click', () => {
+    const filteredData = newData.filter((item) => item.category === 'Laboraty');
+    clearGallery();
+    filteredData.map(a=>ShowData(a))
+    
+  });
+  window.addEventListener('load',()=>{
+    const filteredData = newData.slice(0,10).map((a) => ShowData(a));
+  })
+
+  // Clear the gallery
+  function clearGallery() {
+    let gallaryImg = document.getElementById('gallaryImg');
+    gallaryImg.innerHTML = '';
+  }
+
+  // Show Api Data
+  function ShowData(a) {
+    let img = document.createElement('img');
+    img.src = a.images;
+    let imgdiv = document.createElement('div');
+    imgdiv.append(img);
+    gallaryImg.append(imgdiv);
+  }
+</script>
+
+{% endblock script %}

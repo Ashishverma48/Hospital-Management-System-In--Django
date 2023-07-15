@@ -35,8 +35,13 @@ urlpatterns = [
     path('admin-approvel-appointment/',ViewAdminApprovelAppointment,name='adminApprovelAppointment'),
     path('admin-approve-appointment/<int:id>',ViewAdminApproveAppointment,name='AppointmentApprove'),
     path('admin-reject-appointment/<int:id>',ViewAdminRejectAppointment,name='AppointmentReject'),
+   
+   
+   
+    path('admin-discharge-patient/',ViewAdminPatientDischarge,name='PatientDischarge'),
 
-
+    # Images 
+    path('images',ShowAllImages,name='images'),
 
 
 

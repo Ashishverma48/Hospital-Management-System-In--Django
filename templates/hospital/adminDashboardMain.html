@@ -3,19 +3,23 @@
 <div class="admin-card">
     <div class="cards bg-success text-white">
         <div ><h5>Total Doctor</h5>
-            <h2>{{doctorNum}}</h2></div>
+            <h2>{{doctorApprovedNum}}</h2>
+            <p>Pending <span>{{doctorPendingNum}}</span></p></div>
             <div class="admin-icons text-danger"><i class="fa-solid fa-user-doctor"></i></div>
     </div>
     <div class="cards bg-primary text-white">
         <div ><h5>Total Patient</h5>
-            <h2>{{patientNum}}</h2></div>
+            <h2>{{patientApprovedNum}}</h2>
+            <p> Pending <span>{{patientPendingNum}}</span></p></div>
             <div class="admin-icons text-success"><i class="fa-solid fa-users"></i></div>
     </div>
     <div class="cards bg-danger text-white">
-        <div ><h5>Total Appointment</h5>
-            <h2>{{doctorNum}}</h2></div>
+        <div><h5>Total Appointment</h5>
+            <h2>{{appointmentApproveNum}}</h2>
+            <p>Pending <span>{{appointmentPendingNum}}</span></p>
+        </div>
             <div class="admin-icons text-dark"><i class="fa-solid fa-calendar-days"></i> </div>
-    </div>
+        </div>
    </div>
    <div class="all-list">
     <div >
