@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import Group
 from django.contrib import messages
 from django.contrib.auth import login,logout,authenticate
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required,user_passes_test
 from rest_framework import viewsets
 from .serialzers import GallarySerialzers
 # Create your views here.
@@ -132,12 +132,15 @@ def ViewDoctorLogin(request):
             print(user.groups.name)
             login(request,user)
            
-            if is_admin(user):
-                return redirect('admindashboard')
-            elif is_patient(user):
-                return HttpResponse('<H1>PATIENT DASHBOARD</h1>')
-            elif is_doctor(user):
-                return HttpResponse('<h1>DOCTOR DASHBOARD</h1>')
+            if is_doctor(user):
+                approvel = Doctor.objects.filter(user_id=request.user.id,status = True)
+                if approvel:
+                    return HttpResponse('<H1>DOCTOR DASHBOARD</h1>')
+                else:
+                    messages.warning(request,'Wait For Approvel')
+        else:
+            messages.warning(request,'UserId & Password Not Match !')
+            
         return render(request,'hospital/doctorLogin.html')
     return render(request,'hospital/doctorLogin.html')
 
@@ -152,17 +155,20 @@ def ViewPatientLogin(request):
         if user is not None:
             login(request,user)
           
-            if user.groups.filter(name='PATIENT').exists():
+            if is_patient(user):
                 approvel = Patient.objects.all().filter(user_id=request.user.id,status=True)
                 if approvel:
                     return HttpResponse('<H1>PATIENT DASHBOARD</h1>')
                 else:
                     messages.warning(request,'Wait For Approvel')
+        else:
+            messages.warning(request,'UserId & Password Not Match !')
 
             
     return render(request,'hospital/patientLogin.html')
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def ViewAdminDashboard(request):
     # Doctor 
     doctors = Doctor.objects.all()
@@ -173,6 +179,7 @@ def ViewAdminDashboard(request):
     return render(request,'hospital/adminDashboard.html',locals())
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def ViewAdminDashboardMain(request):
     doctors = Doctor.objects.all()
     doctorApprovedNum = Doctor.objects.all().filter(status = True).count()
@@ -189,11 +196,13 @@ def ViewAdminDashboardMain(request):
     return render(request,'hospital/adminDashboardMain.html',locals())
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def ViewAdmindDoctor(request):
     doctors = Doctor.objects.all().filter(status=True)
     return render(request,'hospital/adminDoctor.html',locals())
-@login_required(login_url='adminlogin')
 
+@login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def ViewAdminDoctorUpdate(request,id):
     
     doctor = Doctor.objects.get(user_id=id)
@@ -219,6 +228,7 @@ def ViewAdminDoctorUpdate(request,id):
     return render(request,'hospital/adminDoctorUpdate.html',locals())
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def ViewAdminDoctorDelete(request,id):
     doctor = Doctor.objects.get(user_id=id)
     user = User.objects.get(id=id)
@@ -231,27 +241,32 @@ def ViewAdminDoctorDelete(request,id):
 
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def ViewAdminDashboardAppointment(request):
     
     return render(request,'hospital/adminAppointment.html')
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def ViewAdminDashboardPatient(request):
 
     return render(request,'hospital/adminDashboardPatient.html')
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def ViewAdminDashboardDoctor(request):
 
     return render(request,'hospital/adminDashboardDoctor.html')
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def ViewAdmindPatient(request):
     patients = Patient.objects.all().filter(status=True)
     print(patients)
     return render(request,'hospital/adminPatient.html',locals())
     
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def ViewAdmindDoctorAdd(request):
     userform = DoctorUserForms()
     doctorform = DoctorForm()
@@ -272,11 +287,13 @@ def ViewAdmindDoctorAdd(request):
     return render(request,'hospital/adminRegisterDoctor.html',locals())
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def ViewAdmindDoctorApprove(request):
     doctors = Doctor.objects.all().filter(status=False)
     return render(request,'hospital/adminApproveDoctor.html',locals())
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def ViewDoctorApprove(request,id):
     doctors = Doctor.objects.get(id=id)
     doctors.status=True
@@ -285,6 +302,7 @@ def ViewDoctorApprove(request,id):
     return redirect('adminDoctor')
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def ViewDoctorReject(request,id):
     doctor = Doctor.objects.get(id=id)
     user = User.objects.get(id=doctor.user_id)
@@ -294,6 +312,7 @@ def ViewDoctorReject(request,id):
 
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def ViewAdmindPatientAdd(request):
     userform = PatientUserForms()
     patientform = PatientForm()
@@ -314,11 +333,13 @@ def ViewAdmindPatientAdd(request):
     return render(request,'hospital/adminRegisterPatient.html',locals())
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def ViewAdminPatientApprovevel(request):
     patients = Patient.objects.all().filter(status=False)
     return render(request,'hospital/patientApprovel.html',locals())
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def ViewAdminPatientApprove(request,id):
     patient = Patient.objects.get(id=id)
     patient.status = True
@@ -326,6 +347,7 @@ def ViewAdminPatientApprove(request,id):
     return redirect('adminPatient')
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def ViewAdminPatientReject(request,id):
     patient = Patient.objects.get(id=id)
     user = User.objects.get(id=patient.user_id)
@@ -334,6 +356,7 @@ def ViewAdminPatientReject(request,id):
     return redirect('adminPatient')
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def ViewAdminPatientUpdate(request,id):
     patientid = Patient.objects.get(id=id)
     userid = User.objects.get(id=patientid.user_id)
@@ -354,6 +377,7 @@ def ViewAdminPatientUpdate(request,id):
     return render(request,'hospital/adminPatientUpdate.html',locals())
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def ViewAdminPatientDelete(request,id):
     patient = Patient.objects.get(id=id)
     user = User.objects.get(id=patient.user_id)
@@ -363,6 +387,7 @@ def ViewAdminPatientDelete(request,id):
     return redirect('adminPatient')
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def ViewAdminAddAppointment(request):
     frm_unbound = AppointmentForm()
     
@@ -386,17 +411,20 @@ def ViewAdminAddAppointment(request):
     return render(request,'hospital/adminAddAppointment.html',{'appointment':frm_unbound})
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def ViewAdminViewAppointment(request):
     appointment = Appointment.objects.all().filter(status=True)
     return render(request,'hospital/adminViewAppointment.html',locals())
 
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def ViewAdminApprovelAppointment(request):
     appointment = Appointment.objects.all().filter(status=False)
     return render(request,'hospital/adminApprovelAppointment.html',locals())
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def ViewAdminApproveAppointment(request,id):
     appointment = Appointment.objects.get(id=id)
     appointment.status = True
@@ -405,6 +433,7 @@ def ViewAdminApproveAppointment(request,id):
     return redirect('adminViewAppointment')
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def ViewAdminRejectAppointment(request,id):
     appointment = Appointment.objects.get(id=id)
     appointment.delete()
@@ -413,6 +442,7 @@ def ViewAdminRejectAppointment(request,id):
 
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def ViewAdminPatientDischarge(request):
     patients = Patient.objects.all().filter(status=True)
     return render(request,'hospital/adminDischargePatient.html',locals())
@@ -425,3 +455,29 @@ class GallaryViewSet(viewsets.ModelViewSet):
 def ShowAllImages(request):
     images = Gallery.objects.all()
     return render(request,'hospital/showAllImages.html',locals())
+
+@login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
+def ViewAdminGalleryDashBoard(request):
+    images = Gallery.objects.all()
+    return render(request,'hospital/adminGallery.html',locals())
+
+@login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
+def ViewAdminAddNewImages(request):
+    images = GalleryForm()
+    if request.method =="POST":
+        image = GalleryForm(request.POST,request.FILES)
+        if image.is_valid():
+            image.save()
+            messages.success(request,'Image Add Successfull')
+            return redirect('adminGalleryDashboard')
+    return render(request,'hospital/adminAddImage.html',locals())
+
+@login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
+def ViewInqueryDashboard(request):
+    inquery  = Contact.objects.all().order_by("-id")
+    return render(request,'hospital/adminInquery.html',locals())
+
+

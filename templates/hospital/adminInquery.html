@@ -1,0 +1,28 @@
+{% extends 'hospital/adminDashboard.html' %} {% block adminDashBoard %}
+
+<div class="admin-card">
+
+    
+    <table class="table">
+        <tr>
+            <th>SR.NO</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Mobile No.</th>
+            <th>Message</th>
+        </tr>
+        {% for i in inquery%}
+        <tr>
+            <td>{{i.id}}</td>
+            <td>{{i.name}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.MobileNo}}</td>
+            <td>{{i.message}}</td>
+        </tr>
+        {% endfor %}
+       
+    </table>
+    
+    
+</div>
+{% endblock adminDashBoard %}

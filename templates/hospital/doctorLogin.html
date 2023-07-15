@@ -3,21 +3,24 @@
 
 {% block content %}
 <div class="container border border-info">
-    <div class="bg-dark text-center text-white p-2 mt-2">
+    <div class=" text-center  p-2 mt-2">
         <h1>Doctor Login</h1>
     </div>
+    {% if messages %}
+    {% for msg in messages %}
+    <div class="alert alert-{{msg.tags}} alert-dismissible fade show mt-4" role="alert">
+      {{msg}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    
+    {% endfor %}
+    {% endif %}
     <div class="mt-3">
         <form action="" method="post" >
             {%  csrf_token %}
             
-            <div class="d-flex justify-content-evenly flex-wrap gap-3">
-                <div class="form-group">
-                    <select name="user" class="form-control" id="">
-                        <option value="ADMIN">ADMIN</option>
-                        <option value="DOCTOR">DOCTOR</option>
-                        <option value="PATIENT">PATIENT</option>
-                    </select>
-                </div>
+            <div class="d-flex justify-content-evenly flex-wrap gap-3" style="width: 50%; margin: auto;">
+               
                 <div class="form-floating" style="width: 30rem;">
                     <input type="text" class="form-control" placeholder="Username" id="adminUserName" name="adminUserName">
                     <label for="adminUserName">Username</label>
@@ -26,7 +29,7 @@
                     <input type="password" class="form-control" placeholder="Password" id="adminPassword" name="adminPassword">
                     <label for="adminPassword">Password</label>
                 </div>
-                <button class="btn btn-primary w-25">Login</button>
+                <button class="btn btn-primary w-75">Login</button>
             </div>
             <p class="text-center p-3">Dont have a acoount <a href="{% url 'doctorsignup'%}">Signup</a></p>
         

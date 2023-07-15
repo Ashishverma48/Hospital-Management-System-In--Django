@@ -36,7 +36,10 @@ urlpatterns = [
     path('admin-approve-appointment/<int:id>',ViewAdminApproveAppointment,name='AppointmentApprove'),
     path('admin-reject-appointment/<int:id>',ViewAdminRejectAppointment,name='AppointmentReject'),
    
+   path('admin-gallery/',ViewAdminGalleryDashBoard,name='adminGalleryDashboard'),
+   path('add-image/',ViewAdminAddNewImages,name='adminAddNewImage'),
    
+   path('admin-inquery/',ViewInqueryDashboard,name='adminInquery'),
    
     path('admin-discharge-patient/',ViewAdminPatientDischarge,name='PatientDischarge'),
 

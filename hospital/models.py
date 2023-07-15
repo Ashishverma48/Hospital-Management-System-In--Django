@@ -68,7 +68,7 @@ class Gallery(models.Model):
                 ('Neurology', 'Neurology'),
                 ('Laboraty', 'Laboraty'),
                 ]
-    category=models.CharField(choices=categories,max_length=50)
+    category=models.CharField(choices=categories,max_length=50,default='Cardiologist')
     images  = models.ImageField(upload_to='gallary/')
 
 class Contact(models.Model):

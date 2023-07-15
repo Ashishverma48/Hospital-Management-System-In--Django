@@ -91,3 +91,8 @@ class ContactForm(forms.ModelForm):
         for frm in self.fields.values():
             frm.widget.attrs['placeholder'] = f'Enter {frm.label}'
             frm.widget.attrs['class'] = 'form-control'
+
+class GalleryForm(forms.ModelForm):
+    class Meta:
+        model = Gallery
+        fields = '__all__'

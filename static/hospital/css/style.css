@@ -194,7 +194,9 @@ nav a {
   justify-content: space-between;
 }
 .footerLinks a:hover{
-  color: rgba(7, 7, 116, 0.622);
+  color: rgba(39, 107, 217, 0.622);
+  transition: .3s ease-in;
+  
 }
 
 /* Footer Section  End*/

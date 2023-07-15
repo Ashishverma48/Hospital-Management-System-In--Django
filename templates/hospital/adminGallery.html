@@ -1,0 +1,32 @@
+{% extends 'hospital/adminDashboard.html' %} {% block adminDashBoard %}
+{% if messages %}
+{% for msg in messages %}<div class="alert alert-{{msg.tags}} alert-dismissible fade show" role="alert">
+{{msg}}
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+{% endfor %}
+{% endif %}
+
+<div class="admin-card">
+
+    <a href="{% url 'adminAddNewImage' %}"><h5>Add New Images</h5></a>
+    
+    <table class="table">
+        <tr>
+            <th>SR.NO</th>
+            <th>Category</th>
+            <th>Images</th>
+        </tr>
+        {% for img in images %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{img.category}}</td>
+            <td><img src="{{img.images.url}}" style="width: 100px; height: 100px;" alt=""></td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+    
+</div>
+{% endblock adminDashBoard %}

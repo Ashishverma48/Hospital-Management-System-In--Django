@@ -1,0 +1,31 @@
+{% extends 'hospital/adminDashboard.html' %} {% block adminDashBoard %}
+{% if messages %}
+{% for msg in messages %}<div class="alert alert-{{msg.tags}} alert-dismissible fade show" role="alert">
+{{msg}}
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+{% endfor %}
+{% endif %}
+
+<div class="admin-card">
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+  <div class="form-group" >
+    {% for img in images %}
+    <div class="mb-3">
+     {{img.label}}
+    {{img}}
+    <span class="text-danger">{{frm.errors}}</span>
+    </div>
+    {% endfor %}
+  </div>
+  <button class="btn btn-primary">Add New Images</button>
+
+</form>
+    
+   
+    
+</div>
+{% endblock adminDashBoard %}
