@@ -135,7 +135,7 @@ def ViewDoctorLogin(request):
             if is_doctor(user):
                 approvel = Doctor.objects.filter(user_id=request.user.id,status = True)
                 if approvel:
-                    return HttpResponse('<H1>DOCTOR DASHBOARD</h1>')
+                    return redirect('doctorDash')
                 else:
                     messages.warning(request,'Wait For Approvel')
         else:
@@ -393,7 +393,7 @@ def ViewAdminAddAppointment(request):
     
     if request.method == 'POST':
         frm_bound = AppointmentForm(request.POST)
-        print('enter ')
+        
         if frm_bound.is_valid():
             print('success')
             appointment  = frm_bound.save(commit=False)
@@ -401,7 +401,7 @@ def ViewAdminAddAppointment(request):
             appointment.patientId = request.POST.get('patientId')
             appointment.doctorName = User.objects.get(id=request.POST.get('doctorId')).first_name
             appointment.patientName = User.objects.get(id=request.POST.get('patientId')).first_name
-            # appointment.status  = True
+            appointment.status  = True
             appointment.save()
             messages.success(request,'Appointment Add Successfully ')
             return redirect('admindashboardApppintment')
@@ -478,6 +478,58 @@ def ViewAdminAddNewImages(request):
 @user_passes_test(is_admin)
 def ViewInqueryDashboard(request):
     inquery  = Contact.objects.all().order_by("-id")
-    return render(request,'hospital/adminInquery.html',locals())
+    return render(request,'hospital/adminInquery.html',locals())\
+    
+
+
+
+
+# Doctor DashBoard Start
+
+def ViewDoctorDashBoard(request):
+    patientCount = Patient.objects.all().filter(status=True,assignedDoctorId=request.user.id).count()
+    appointmentCount = Appointment.objects.all().filter(status=True,doctorId=request.user.id).count()
+    appointment=Appointment.objects.all().filter(status = True,doctorId=request.user.id)
+    patientid = []
+    for i in appointment:
+        patientid.append(i.patientId)
+    patient  = Patient.objects.filter(status=True,user_id__in=patientid).order_by('-id')
+    appointments = zip(appointment,patient)
+    return render(request,'hospital/doctorDashBoard.html',locals())
+
+def ViewDoctorDashBoardPatient(request):
+    return render(request,'hospital/doctorDashBoardPatient.html')
+
+def ViewDoctorDashBoardPatientRecord(request):
+    patients = Patient.objects.all().filter(status =True,assignedDoctorId=request.user.id)
+    data = {'patients':patients}
+    if request.method=="POST":
+        search  = request.POST.get('seachPatient')
+        patients = Patient.objects.search_by_first_name(search)
+        print(patients)
+        data = {'patients':patients}
+
+    return render(request,'hospital/doctorDashPatientRecord.html',data)
+
+def ViewDoctorDashBoardAppointMent(request):
+    appointment  =Appointment.objects.all().filter(status = True,doctorId = request.user.id)
+    patientid = []
+    for i in appointment:
+        patientid.append(i.patientId)
+    patient = Patient.objects.filter(status=True,user_id__in=patientid)
+    appointments = zip(appointment,patient)
+    return render(request,'hospital/doctorDashAppoitmentRecord.html',{'appointments':appointments})
+
+
+def ViewDoctorDashBoardAppointMentRemove(request,id):
+    appointment = Appointment.objects.get(id=id)
+    appointment.delete()
+   
+    
+   
+    
+    return redirect('doctorDashAppointMent')
+    
+
 
 

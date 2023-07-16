@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doctor Dashboard</title>
+    <link rel="stylesheet" href="{% static 'hospital/css/admin.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'hospital/css/admin-responsive.css' %}"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/f5b6191954.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <nav class="bg-info d-flex justify-content-between align-items-center px-4">
+      <h1>Doctor Dashboard</h1>
+      <a href="{% url 'logout' %}"><button class="btn btn-danger">Logout</button></a>
+    </nav>
+    <div class="container-fluid admin">
+      <div class="admin-left">
+        <div>
+          <img src="{% static 'hospital/images/doctor.png' %}" alt="" />
+          <h4>Welcome</h4>
+          <h5>{{request.user}}</h5>
+        </div>
+        <div>
+          <a href="{% url 'doctorDash' %}"
+            ><button class="active">
+              <i class="fa-solid fa-chart-line"></i> &nbsp; DashBoard
+            </button></a
+          >
+          
+          <a href="{% url 'doctorDashPatient'%}">
+            <button><i class="fa-solid fa-users"></i>&nbsp; Patient</button></a
+          >
+          <a href="{% url 'doctorDashAppointMent' %}"
+            ><button>
+              <i class="fa-solid fa-calendar-days"></i> &nbsp; Appointment
+            </button></a
+          >
+         
+        </div>
+      </div>
+      <div class="admin-right">
+        {% block doctorDashBoard %}
+        <div class="admin-card">
+          <div class="cards bg-success text-white">
+            <div>
+              <h5>Appointment for You</h5>
+              <h3>{{appointmentCount}}</h3>
+            </div>
+            <div class="admin-icons text-danger">
+                <i class="fa-solid fa-calendar-days"></i>
+            </div>
+          </div>
+          <div class="cards bg-secondary text-white">
+            <div>
+              <h5>Total Patient</h5>
+              <h2>{{patientCount}}</h2>
+            </div>
+            <div class="admin-icons text-primary">
+              <i class="fa-solid fa-hospital-user"></i>
+            </div>
+          </div>
+          <div class="cards bg-danger text-white">
+            <div>
+              <h5>Total Appointment</h5>
+              <h2>{{doctorNum}}</h2>
+            </div>
+            <div class="admin-icons text-dark">
+              
+            </div>
+          </div>
+        </div>
+        <div class="all-list">
+          <div class="w-100" >
+            <table class="table border-info border">
+              <tr>
+                <th colspan="6" class="text-center bg-primary text-white">
+                  Recent Appointment For You
+                </th>
+              </tr>
+              <tr>
+                <th>Picture</th>
+                <th>Patient Name</th>
+                <th>Discription</th>
+                <th>Mobile</th>
+                <th>Address</th>
+                <th>Date</th>
+              </tr>
+              {% for a,p in appointments %}
+              <tr>
+                <td><img src="{{p.profile_pic.url}}" alt=" " style="border-radius: 50%; width: 3rem;"></td>
+                <td>{{a.patientName}}</td>
+                <td>{{a.description}}</td>
+                <td>{{p.mobile}}</td>
+                <td>{{p.address}}</td>
+                <td>{{a.appointmentDate}}</td>
+
+                 
+              </tr>
+              {% endfor %}
+            </table>
+          </div>
+         
+        </div>
+        {% endblock doctorDashBoard %}
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

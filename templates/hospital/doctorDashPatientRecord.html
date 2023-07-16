@@ -1,0 +1,36 @@
+{% extends 'hospital/doctorDashBoard.html' %}
+{% block doctorDashBoard %}
+<h2 class="text-center p-2 border"> Patient Record</h2>
+<form action="" method="post">
+    {% csrf_token %}
+    <div id="search"><input type="text" name="seachPatient" id="seachPatient" placeholder="Search Patient">
+        <button>Serach</button></div>
+</form>
+<table class="table table-striped table-hover">
+    
+    <tr class="bg-info" > 
+        <th >Profile Picture</th>
+        <th>Name</th>
+        <th>Mobile</th>
+        <th>Address</th>
+        <th>Symptoms</th>
+        
+    </tr>
+    {% for patient in patients %}
+        <tr>
+        <td><img id="doctorImg" src="{{patient.profile_pic.url}}" alt=""></td>
+        <td>{{patient.user.first_name}}</td>
+        <td>{{patient.mobile}}</td>
+        <td>{{patient.address}}</td>
+        <td>{{patient.symptoms}}</td>
+        <!-- <td><a href="{% url 'PatientUpdate' patient.id %}"><i class="fa-regular fa-pen-to-square"></i></a></td>
+        <td><a href="{% url 'PatientDelete' patient.id %}"><i class="fa-solid fa-trash"></i></a></td> -->
+       
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" class="text-center">No Patient Found !</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock doctorDashBoard %}

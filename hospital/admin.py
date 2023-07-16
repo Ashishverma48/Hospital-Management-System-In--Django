@@ -13,4 +13,8 @@ class DoctorAdmin(admin.ModelAdmin):
 @admin.register(Gallery)
 class GalleryAdmin(admin.ModelAdmin):
    list_display=['category',"images"]
+
+@admin.register(Appointment)
+class GalleryAdmin(admin.ModelAdmin):
+   list_display=['patientId',"doctorId",'patientName','doctorName','description','appointmentDate','status']
         

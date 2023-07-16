@@ -1,0 +1,15 @@
+{% extends 'hospital/doctorDashBoard.html' %} {% block doctorDashBoard %}
+<div class="admin-card">
+    <div class="cardsApp" >
+       <a href="{% url 'doctorDashPatientRecord' %}">
+        <h6>Patient Record</h6>
+        <i class="fa-solid fa-user-injured"></i>
+        </div>
+       </a>
+    <div class="cardsApp">
+        <a href="{% url 'adminPatientAdd'%}"><h6>Your DisCharge Patient</h6>
+            <i class="fa-solid fa-eject"></i>
+    </div>
+   
+</div>
+{% endblock doctorDashBoard %}

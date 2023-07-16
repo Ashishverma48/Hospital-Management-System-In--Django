@@ -24,6 +24,10 @@ class Doctor(models.Model):
     def __str__(self):
         return f"{self.user.first_name},{self.department}"
 
+class PatientManager(models.Manager):
+    def search_by_first_name(self, first_name):
+        return self.get_queryset().filter(user__first_name__icontains=first_name)
+
 
 class Patient(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -36,6 +40,8 @@ class Patient(models.Model):
     admitDate = models.DateField(auto_now=True)
     status = models.BooleanField(default=False)
 
+
+    objects = PatientManager()
     @property
     def get_name(self):
         return self.user.first_name+" "+self.user.last_name

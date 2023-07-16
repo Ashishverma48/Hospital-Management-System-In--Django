@@ -20,11 +20,13 @@ from .import settings
 from rest_framework.routers import DefaultRouter
 from hospital.views import GallaryViewSet
 router = DefaultRouter()
+
 router.register(r'gallery',GallaryViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('hospital.urls')),
-    path('',include(router.urls)),
+    path('',include(router.urls)),  # ROUTER URL 
+
 
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

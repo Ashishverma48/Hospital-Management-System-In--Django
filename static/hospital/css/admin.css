@@ -89,7 +89,7 @@
     color: white;
 }
 th{
-    background-color: aquamarine !important;
+    background-color: rgba(10, 109, 76, 0.692) !important;
 }
 tr:nth-child(even){
     background-color: rgba(127, 255, 212, 0.346) !important;
@@ -128,3 +128,22 @@ margin-top: 2rem;
 .cardsApp:nth-child(3){
   background-color: rgb(236, 164, 9);
 }
+
+#search{
+  border: 1px solid;
+  border-radius: 4px;
+  
+  float: right;
+  margin: .3rem 1REM;
+}
+#search input{
+  border: none;
+  outline: none;
+}
+#search button{
+  border: 0;
+  padding: .2rem 1rem ;
+  z-index: -2;
+  /* border-radius: 5px; */
+}
+
