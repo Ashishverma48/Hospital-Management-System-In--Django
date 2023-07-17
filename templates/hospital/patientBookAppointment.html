@@ -1,0 +1,20 @@
+{% extends 'hospital/patientDashboard.html' %} {% block patientDashBoard %}
+    <div class=" ">
+        <h3 class="p-3 bg-secondary text-white text-center">Book Appointment Details</h3>
+   
+    <form action="" method="post">
+        {% csrf_token %}
+        <div  id="appfrm">
+            {% for frm in form %}
+           <div>
+            {{frm}}
+            <span class="text-center">{{frm.errors}}</span>
+           </div>
+            {% endfor %}
+            <button class="btn btn-success w-25">Book Appointment</button>
+        </div>
+    </form>
+</div>
+
+
+{% endblock patientDashBoard %}

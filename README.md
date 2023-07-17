@@ -47,6 +47,7 @@
 pip install django==3.0.5
 pip install django-widget-tweaks
 pip install xhtml2pdf
+pip install djangorestframework
 ```
 - Download This Project Zip Folder and Extract it
 - Move to project folder in Terminal. Then run following Commands :
@@ -86,4 +87,4 @@ This project is developed for demo purpose and it's not supposed to be used in r
 ## Feedback
 Any suggestion and feedback is welcome. You can message me on facebook
 - [Contact on Linkdin](https://www.linkedin.com/in/ashishverma48/)
-- [Contact on Email](ashishkv845@gmail.com)
+- [Contact on Email](mailto:ashishkv845@gmail.com)

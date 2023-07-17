@@ -158,7 +158,7 @@ def ViewPatientLogin(request):
             if is_patient(user):
                 approvel = Patient.objects.all().filter(user_id=request.user.id,status=True)
                 if approvel:
-                    return HttpResponse('<H1>PATIENT DASHBOARD</h1>')
+                    return redirect('patientDashBoard')
                 else:
                     messages.warning(request,'Wait For Approvel')
         else:
@@ -529,6 +529,42 @@ def ViewDoctorDashBoardAppointMentRemove(request,id):
    
     
     return redirect('doctorDashAppointMent')
+    
+
+# DOCTOR DASHBOARD
+
+def ViewPatientDashBoard(request):
+   try:
+     patient = Patient.objects.get(user_id = request.user.id)
+     doctor = Doctor.objects.get(user_id=patient.assignedDoctorId)
+     print(patient,doctor)
+     return render(request,'hospital/patientDashboard.html',locals())
+   except Exception as Identifier:
+    pass
+    return render(request,'hospital/patientDashboard.html',locals())
+   
+def ViewPatientDashAppointment(request):
+    appointment = Appointment.objects.all().filter(patientId = request.user.id).order_by('-id')
+    return render(request,'hospital/patientDashBoardAppointment.html',locals())
+
+def ViewPatientBookAppointment(request):
+    frm_unbound = PatientAppointmentForm()
+    data = {
+        'form':frm_unbound
+    }
+    if request.method == 'POST':
+        frm_bound = PatientAppointmentForm(request.POST)
+        if frm_bound.is_valid():
+            app = frm_bound.save(commit=False)
+            app.doctorId = request.POST.get('doctorId')
+            app.patientId = request.user.id
+            app.patientName  = User.objects.get(id=request.user.id).first_name
+            app.doctorName = User.objects.get(id=request.POST.get('doctorId')).first_name
+            app.save()
+            messages.success(request,'Appointment Book Successfully')
+            return redirect('patientDashBoardAppointment')
+
+    return render(request,'hospital/patientBookAppointment.html',data)
     
 
 

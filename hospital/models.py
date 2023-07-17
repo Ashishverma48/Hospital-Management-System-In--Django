@@ -23,6 +23,10 @@ class Doctor(models.Model):
 
     def __str__(self):
         return f"{self.user.first_name},{self.department}"
+    
+    @property
+    def get_name(self):
+        return self.user.first_name+" "+self.user.last_name
 
 class PatientManager(models.Manager):
     def search_by_first_name(self, first_name):
@@ -42,6 +46,7 @@ class Patient(models.Model):
 
 
     objects = PatientManager()
+
     @property
     def get_name(self):
         return self.user.first_name+" "+self.user.last_name

@@ -1,0 +1,37 @@
+{% extends 'hospital/patientDashboard.html' %} {% block patientDashBoard %}
+{% if messages %}
+{% for msg in messages %}<div class="alert alert-{{msg.tags}} alert-dismissible fade show" role="alert">
+{{msg}}
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+{% endfor %}
+{% endif %}
+<div>
+    <h5 class="text-center p-2 border border-info bg-secondary text-white">Your Appointment</h5>
+    <a href="{% url 'patientBookAppointment' %}"><button style="float: right;" class="m-2 btn btn-primary fw-semibold">Book New Appointment</button></a>
+    <table class="table">
+      
+        <tr>
+            <th>Doctor Name</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+        {% for app in appointment %}
+        <tr>
+            <td>{{app.doctorName}}</td>
+            <td>{{app.description}}</td>
+            <td>{{app.appointmentDate}}</td>
+            <td>
+                {% if app.status %}
+                <span class="text-whitw bg-success px-3 py-1 " style="border-radius: 5px;">Booked</span>
+                {% else %}
+                <span class="text-dark bg-warning px-3 py-1 " style="border-radius: 5px;">Pending</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock patientDashBoard %}

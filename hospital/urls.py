@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import *
 urlpatterns = [
-    
+
 # HOME PAGE
     path('',viewHome,name='home'),
     path('login/',ViewLogin,name='login'),
@@ -75,5 +75,8 @@ urlpatterns = [
     path('patient-signup/',ViewPatientSignup,name='patientsignup'),
     path('patient-login/',ViewPatientLogin,name='patientlogin'),
 
-
+# PATIENT DASHBOARD 
+    path('patient-dash/',ViewPatientDashBoard,name='patientDashBoard'),
+    path('patient-dash-appointment/',ViewPatientDashAppointment,name='patientDashBoardAppointment'),
+    path('patient-book-appointment/',ViewPatientBookAppointment,name='patientBookAppointment'),
 ]

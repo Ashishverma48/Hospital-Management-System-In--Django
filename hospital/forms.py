@@ -79,6 +79,21 @@ class AppointmentForm(forms.ModelForm):
             frm.widget.attrs['class']='form-control'
             frm.widget.attrs['placeholder']=frm.label
 
+ 
+class PatientAppointmentForm(forms.ModelForm):
+    
+    doctorId = forms.ModelChoiceField(queryset=Doctor.objects.all().filter(status=True),empty_label='Doctor Name And Department',to_field_name='user_id')
+    class Meta:
+        model = Appointment
+        fields = ['description']
+        
+    def __init__(self,*args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for frm in self.fields.values():
+            frm.widget.attrs['class']='form-control'
+            frm.widget.attrs['placeholder']=frm.label
+
+
 
 class ContactForm(forms.ModelForm):
     class Meta:

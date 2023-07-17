@@ -104,11 +104,12 @@ tr:nth-child(even){
 
 .cardsApp{
 display: block;
-padding: 1.3rem 2rem;
-background-color: red;
+padding: 1.4rem 2rem;
+background-color: rgb(9, 176, 142);
 border-radius: 10px;
 color: white;
 min-width: 18rem;
+max-width: 19rem;
 margin-top: 2rem;
 }
 .cardsApp>a{
@@ -119,6 +120,7 @@ margin-top: 2rem;
   margin-top: .5rem;
   font-size: 1.5rem;
 }
+
 .cardsApp:nth-child(1){
   background-color: rgba(30, 168, 222, 0.996);
 }
@@ -126,7 +128,22 @@ margin-top: 2rem;
   background-color: rgb(11, 150, 20);
 }
 .cardsApp:nth-child(3){
+  background-color: rgb(164, 9, 236);
+}
+.cardsApp:nth-child(4){
+  background-color: rgb(236, 9, 107);
+}
+.cardsApp:nth-child(5){
   background-color: rgb(236, 164, 9);
+}
+
+.cardsApp:hover{
+  background-color: rgb(10, 188, 159);
+  transition: .2s ease-in-out;
+  transform: scale(1..5);
+}
+.cardsApp h4{
+  color: rgba(0, 0, 0, 0.794);
 }
 
 #search{
@@ -147,3 +164,25 @@ margin-top: 2rem;
   /* border-radius: 5px; */
 }
 
+.pd-card{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+.pd-card>i{
+  font-size: 2.2rem;
+  padding: 1rem 1.2rem;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.52);
+  color: rgb(160, 39, 5);
+  
+}
+
+#appfrm{
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  border: 1px solid turquoise ;
+  padding: 2rem;
+}
