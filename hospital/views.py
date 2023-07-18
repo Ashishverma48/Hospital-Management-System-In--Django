@@ -486,6 +486,8 @@ def ViewInqueryDashboard(request):
 
 # Doctor DashBoard Start
 
+@login_required(login_url='doctorlogin')
+@user_passes_test(is_doctor)
 def ViewDoctorDashBoard(request):
     patientCount = Patient.objects.all().filter(status=True,assignedDoctorId=request.user.id).count()
     appointmentCount = Appointment.objects.all().filter(status=True,doctorId=request.user.id).count()
@@ -497,9 +499,15 @@ def ViewDoctorDashBoard(request):
     appointments = zip(appointment,patient)
     return render(request,'hospital/doctorDashBoard.html',locals())
 
+
+@login_required(login_url='doctorlogin')
+@user_passes_test(is_doctor)
 def ViewDoctorDashBoardPatient(request):
     return render(request,'hospital/doctorDashBoardPatient.html')
 
+
+@login_required(login_url='doctorlogin')
+@user_passes_test(is_doctor)
 def ViewDoctorDashBoardPatientRecord(request):
     patients = Patient.objects.all().filter(status =True,assignedDoctorId=request.user.id)
     data = {'patients':patients}
@@ -511,6 +519,8 @@ def ViewDoctorDashBoardPatientRecord(request):
 
     return render(request,'hospital/doctorDashPatientRecord.html',data)
 
+@login_required(login_url='doctorlogin')
+@user_passes_test(is_doctor)
 def ViewDoctorDashBoardAppointMent(request):
     appointment  =Appointment.objects.all().filter(status = True,doctorId = request.user.id)
     patientid = []
@@ -520,7 +530,8 @@ def ViewDoctorDashBoardAppointMent(request):
     appointments = zip(appointment,patient)
     return render(request,'hospital/doctorDashAppoitmentRecord.html',{'appointments':appointments})
 
-
+@login_required(login_url='doctorlogin')
+@user_passes_test(is_doctor)
 def ViewDoctorDashBoardAppointMentRemove(request,id):
     appointment = Appointment.objects.get(id=id)
     appointment.delete()
@@ -531,8 +542,9 @@ def ViewDoctorDashBoardAppointMentRemove(request,id):
     return redirect('doctorDashAppointMent')
     
 
-# DOCTOR DASHBOARD
-
+# PATIENT DASHBOARD
+@login_required(login_url='patientlogin')
+@user_passes_test(is_patient)
 def ViewPatientDashBoard(request):
    try:
      patient = Patient.objects.get(user_id = request.user.id)
@@ -542,11 +554,15 @@ def ViewPatientDashBoard(request):
    except Exception as Identifier:
     pass
     return render(request,'hospital/patientDashboard.html',locals())
-   
+
+@login_required(login_url='patientlogin')
+@user_passes_test(is_patient) 
 def ViewPatientDashAppointment(request):
     appointment = Appointment.objects.all().filter(patientId = request.user.id).order_by('-id')
     return render(request,'hospital/patientDashBoardAppointment.html',locals())
 
+@login_required(login_url='patientlogin')
+@user_passes_test(is_patient)
 def ViewPatientBookAppointment(request):
     frm_unbound = PatientAppointmentForm()
     data = {

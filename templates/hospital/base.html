@@ -8,8 +8,12 @@
     <title>Hospital Management</title>
     
     <link rel="stylesheet" href="{% static 'hospital/css/style.css' %}">
+    <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+/>
     <script src="https://kit.fontawesome.com/f5b6191954.js" crossorigin="anonymous"></script><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    {% block style %}{% endblock style %}
+    
 </head>
 <body>
 
@@ -23,7 +27,7 @@
       <li><a href="#contact">Contact Us</a></li>
       <li><a href="{% url 'login' %}">Login</a></li>
     </ul>
-    <button>Book an Appointment</button>
+    <a href="{% url 'patientDashBoard'%}"><button>Book an Appointment</button></a>
   </nav>
  
 <main>
@@ -56,11 +60,39 @@
  <div>
   <p class="text-center">Copyright || Ashish Verma @2023 || All Right Reserved</p>
  </div>
-</footer>
- 
  {% block script %}{% endblock script %}
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<script>
+  const swiper = new Swiper('.swiper', {
+  // Optional parameters
+  // direction: 'vertical',
+  loop: true,
+  slidesPerView: 3,
+  delay:2000,
+  centerSlide: 'true',
+    fade: 'true',
+    // spaceBetween: 5,
+  // spaceBetween: 100,
+  
 
- 
+  // If we need pagination
+  pagination: {
+    el: '.swiper-pagination',
+  },
+
+  // Navigation arrows
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+
+  // And if we need scrollbar
+  scrollbar: {
+    el: '.swiper-scrollbar',
+  },
+});
+</script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -22,7 +22,7 @@ nav > ul {
 li {
   font-weight: 500;
 }
-nav > button {
+nav  button {
   border: none;
   padding: 0.3rem 1rem;
   border-radius: 10px;
@@ -232,3 +232,8 @@ nav a {
 }
 /* ShowAllImg Section  End*/
 
+
+
+.swiper{
+  width: 1000px;
+}

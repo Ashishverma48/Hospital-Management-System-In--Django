@@ -81,18 +81,23 @@
 </div>
 <section class="exportDoctor">
 <h2 class="text-center p-3">Expert Doctor</h2>
-<div class="d-flex flex-wrap gap-3 justify-content-center">
-{% for doc in doctors %}
-  <div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="{{doc.profile_pic.url}}" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title text-center">{{doc.user.first_name}}</h5>
-     
+<div class="swiper">
+  <div class="swiper-wrapper d-flex " id="owl-demo">
+    {% for doc in doctors %}
+      <div class="swiper-slide">
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="{{doc.profile_pic.url}}" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title text-center">{{doc.user.first_name}}</h5>
+           
+          </div>
+        </div>
+      </div>
+    {% endfor %}
     </div>
-  </div>
-{% endfor %}
+    
+    
 </div>
-
 </section>
 <section class="gallary" id="gallary">
  
@@ -172,6 +177,7 @@
   initialize();
 
   document.getElementById('AllClickBtn').addEventListener('click', () => {
+    clearGallery();
     const filteredData = newData.slice(0,10).map((a) => ShowData(a));
 
     
