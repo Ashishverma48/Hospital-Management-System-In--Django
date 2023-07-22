@@ -33,8 +33,9 @@ def ViewAdminSignup(request):
     if request.method == 'POST':
         form  = AdminForms(request.POST)
         if form.is_valid():
-            user = form.save()
-            user.set_password(user.password)
+            password = form.cleaned_data['password']
+            user = form.save(commit=False)
+            user.set_password(password)
             user.save()
             my_admin_group = Group.objects.get_or_create(name='ADMIN')
             my_admin_group[0].user_set.add(user)
@@ -49,8 +50,12 @@ def ViewDoctorSignup(request):
         userform = DoctorUserForms(request.POST)
         doctorform = DoctorForm(request.POST,request.FILES)
         if userform.is_valid() and doctorform.is_valid():
-            user  = userform.save()
-            user.set_password(user.password)
+            password = userform.cleaned_data['password']
+            user  = userform.save(commit=False)
+            print(password)
+            user.set_password(password)
+            print(user.password)
+            # print(userform.password)
             user.save()
             doctor = doctorform.save(commit=False)
             doctor.user = user
@@ -71,8 +76,10 @@ def ViewPatientSignup(request):
         userform = PatientUserForms(request.POST)
         patientform = PatientForm( request.POST,request.FILES)
         if userform.is_valid() and patientform.is_valid():
-            user = userform.save()
-            user.set_password(user.password)
+            password  = userform.cleaned_data['password']
+            user = userform.save(commit=False)
+
+            user.set_password(password)
             user.save()
             patient = patientform.save(commit=False)
             patient.user  = user
